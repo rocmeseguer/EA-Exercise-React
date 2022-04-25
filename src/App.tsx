@@ -3,11 +3,11 @@ import { BrowserRouter, Routes, Route} from "react-router-dom";
 
 import './App.css';
 
-import Home from './Home';
-import Item from './Item';
-import Items from './Items';
-import NewItem from './NewItem';
-import NavBar from './NavBar';
+import Home from './Components/Home';
+import Item from './Components/Item';
+import Items from './Components/Items';
+import NewItem from './Components/NewItem';
+import NavBar from './Components/NavBar';
 
 function App() {
   return (
