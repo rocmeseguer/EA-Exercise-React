@@ -13,8 +13,8 @@ function Item() {
 
     const getData = async () => {
         const res = await axios.get('https://jsonplaceholder.typicode.com/todos/' + id);
-        setTodo(res.data);
-        console.log(res.data)
+        const getTodo = res.data as ITodo;
+        setTodo(getTodo);
     }
 
     useEffect( () => {
@@ -27,7 +27,7 @@ function Item() {
 
             <div>Title: { todo?.title }</div>
 
-            <div>Completed: { todo?.completed }</div>
+            <div>Completed: { todo?.completed.toString() }</div>
         
         </div>
 
