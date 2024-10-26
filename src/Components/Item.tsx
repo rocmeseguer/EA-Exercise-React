@@ -1,37 +1,33 @@
 
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import axios from 'axios';
+import { getTodoById } from '../Services/todoService';
+import { TaskCard } from "./TaskCard";
 
 import { ITodo } from '../Model/Todo';
 
-function Item() {
-    const { id } = useParams();
+export const Item: React.FC = () => { 
+    const { id } = useParams<{ id: string }>();
+    const [todo, setTodo] = useState<ITodo>();
 
-    const [todo, setTodo] = useState<ITodo>()
-
-    const getData = async () => {
-        const res = await axios.get('https://jsonplaceholder.typicode.com/todos/' + id);
-        const getTodo = res.data as ITodo;
-        setTodo(getTodo);
-    }
+    // Función para obtener los datos del Todo
+    const fetchTodo = async () => {
+        if (id) {
+            const getTodo = await getTodoById(id);
+            setTodo(getTodo);
+        }
+    };
 
     useEffect( () => {
-        getData();
-    }, [])
+        fetchTodo();
+    }, [id])
 
     return (
         <div>
-            <h2>Item ID: { id } </h2>
-
-            <div>Title: { todo?.title }</div>
-
-            <div>Completed: { todo?.completed.toString() }</div>
-        
+            {todo && <TaskCard task={todo} />}
         </div>
 
     );
   }
 
-  export default Item;
+export default Item;

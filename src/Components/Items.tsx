@@ -1,31 +1,30 @@
-import './Items.css';
-
 import React from 'react';
 import { ChangeEvent, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import { ITodo } from '../Model/Todo';
+import { getAllTodos } from '../Services/todoService';
 
 type InputChange = ChangeEvent<HTMLInputElement>;
 
-function Items() {
+export const Items: React.FC = () => {
 
     const [todos, setTodos] = useState<ITodo[]>([])
     const [filteredTodos, setFilteredTodos] = useState<ITodo[]>([])
 
-    const getData = async () => {
-        const res = await axios.get('https://jsonplaceholder.typicode.com/todos');
-        setTodos(res.data);
-        setFilteredTodos(res.data);
-    }
+    const fetchTodos = async () => {
+        const getTodos = await getAllTodos();
+        setTodos(getTodos);
+        setFilteredTodos(getTodos);
+    };
+
 
     useEffect( () => {
-        getData();
+        fetchTodos();
     }, [])
 
     const handleInputChange = (e: InputChange) => {
         e.preventDefault();
-        console.log(e.target.name, e.target.value );
         setFilteredTodos(
             todos.filter(function(item) {
                 return item.title.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1

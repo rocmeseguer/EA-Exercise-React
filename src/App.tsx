@@ -6,7 +6,6 @@ import './App.css';
 import Home from './Components/Home';
 import Item from './Components/Item';
 import Items from './Components/Items';
-import NewItem from './Components/NewItem';
 import NavBar from './Components/NavBar';
 
 function App() {
@@ -18,7 +17,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/items" element={<Items />} />
-        <Route path="/items/new" element={<NewItem />} />
         <Route path="/items/:id" element={<Item />} />
       </Routes>
     </BrowserRouter>
