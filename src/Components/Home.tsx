@@ -10,11 +10,11 @@ export const Home: React.FC = () => {
     return (
         <div>
             <h2>Home</h2>
-            <div className="containerFlex">
-                <div className="column">
+            <div className="w3-row">
+                <div className="w3-col s6">
                     <TaskForm addANewTask={addANewTask} />
                 </div>
-                <div className="column">
+                <div className="w3-col s6">
                     <TaskList tasks={tasks} deleteATask={deleteATask} />
                 </div>
             </div>

@@ -29,33 +29,38 @@ export const TaskForm = ({ addANewTask }: Props) => {
     setTask({ ...task, [name]: value });
 
   return (
-    <div className="card card-body bg-secondary text-dark">
-      <h1>Add a Task</h1>
+    <div className="w3-card">
+      <div className=" w3-panel">
+        <h1>Add a Task</h1>
 
-      <form onSubmit={handleNewTask}>
-        <input
-          type="text"
-          placeholder="Write a Title"
-          name="title"
-          onChange={handleInputChange}
-          value={task.title}
-          className="form-control mb-3 shadow-none border-0"
-          autoFocus
-          ref={titleInput}
-        />
-        <p></p>
-        <textarea
-          onChange={handleInputChange}
-          name="description"
-          className="form-control mb-3 shadow-none border-0"
-          placeholder="Write a Description"
-          value={task.description}
-        ></textarea>
-        <p></p>
-        <button type="submit" className="btn btn-primary">
-          Save <AiOutlinePlus />
-        </button>
-      </form>
+        <form onSubmit={handleNewTask}>
+          <label>Title</label>
+          <input
+            type="text"
+            placeholder="Write a Title"
+            name="title"
+            onChange={handleInputChange}
+            value={task.title}
+            className="w3-input"
+            autoFocus
+            ref={titleInput}
+          />
+          <p></p>
+          <label>Description</label>
+          <textarea
+            onChange={handleInputChange}
+            name="description"
+            className="w3-input"
+            placeholder="Write a Description"
+            value={task.description}
+          ></textarea>
+          <p></p>
+          <button type="submit" className="w3-button w3-black">
+            Save <AiOutlinePlus />
+          </button>
+          <p></p>
+        </form>
+      </div>
     </div>
   );
 };

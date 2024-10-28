@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 
+import './w3.css';
 import './App.css';
 
 import Home from './Components/Home';
@@ -13,12 +14,13 @@ function App() {
     <BrowserRouter>
 
       <NavBar />
-      
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/items" element={<Items />} />
-        <Route path="/items/:id" element={<Item />} />
-      </Routes>
+      <div className="w3-container">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/items" element={<Items />} />
+          <Route path="/items/:id" element={<Item />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }

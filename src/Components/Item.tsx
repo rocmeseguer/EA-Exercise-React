@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import { getTodoById } from '../Services/todoService';
 import { TaskCard } from "./TaskCard";
-
 import { ITodo } from '../Model/Todo';
 
 export const Item: React.FC = () => { 
