@@ -11,17 +11,19 @@ interface Props {
 export const TaskList = ({ tasks, deleteATask }: Props): JSX.Element => {
   if (tasks.length === 0)
     return (
-      <div className="w3-panel">
-        <h1>There are no tasks yet </h1>
+      <div className="notification">
+        <h1 className="title is-4">There are no tasks yet</h1>
         <BiTaskX size="5rem" />
       </div>
     );
 
   return (
     <div>
-      <div className="w3-panel">
+      <div className="grid">
         {tasks.map((task, i) => (
+          <div className="cell">
             <TaskCard key={task.id} task={task} deleteATask={deleteATask} />
+          </div>
         ))}
       </div>
     </div>

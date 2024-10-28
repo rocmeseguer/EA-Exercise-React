@@ -8,13 +8,13 @@ export const Home: React.FC = () => {
     const { tasks, addANewTask, deleteATask } = useLocalTodoService();
 
     return (
-        <div>
-            <h2>Home</h2>
-            <div className="w3-row">
-                <div className="w3-col s6">
+        <div className="container">
+            <h2 className="title is-3">Home</h2>
+            <div className="columns">
+                <div className="column is-one-thirds">
                     <TaskForm addANewTask={addANewTask} />
                 </div>
-                <div className="w3-col s6">
+                <div className="column">
                     <TaskList tasks={tasks} deleteATask={deleteATask} />
                 </div>
             </div>

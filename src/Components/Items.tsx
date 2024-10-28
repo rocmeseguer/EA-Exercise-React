@@ -34,33 +34,32 @@ export const Items: React.FC = () => {
     }
 
     return (
-        <div>
-            <h2>Items</h2>
-            <div className="w3-panel">
-                <h3>Filter</h3>
-                <form>
+        <div className="container">
+            <h2 className="title is-3">Items</h2>
+            <div className="field">
+                <label className="label">Filter</label>
+                <div className="control">
                     <input 
+                        className="input" 
                         type="text" 
                         name="filter"
                         onChange={handleInputChange}
                         autoFocus
-                    >
-                    </input>
-                </form>
+                    />
+                </div>
             </div>
 
-            <div className="w3-panel">
-                <ul className="w3-ul w3-border">
-                { filteredTodos.map ( todo => {
-                    return <li>
-                        <Link  to={`/items/${todo.id}`} > { todo.title } </Link>
-                    </li>
-                    }
-                )}
+            <div className="panel">
+                <p className="panel-heading">Todos</p>
+                <ul className="list">
+                    {filteredTodos.map(todo => (
+                        <li key={todo.id} className="panel-block">
+                            <Link to={`/items/${todo.id}`} className="has-text-link">{todo.title}</Link>
+                        </li>
+                    ))}
                 </ul>
             </div>
         </div>
-
     );
   }
 

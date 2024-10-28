@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 
 import './w3.css';
+import './bulma.min.css';
 import './App.css';
 
 import Home from './Components/Home';

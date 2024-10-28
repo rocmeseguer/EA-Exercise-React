@@ -29,38 +29,44 @@ export const TaskForm = ({ addANewTask }: Props) => {
     setTask({ ...task, [name]: value });
 
   return (
-    <div className="w3-card">
-      <div className=" w3-panel">
-        <h1>Add a Task</h1>
+    <div className="box">
+      <h1 className="title is-4">Add a Task</h1>
+      <form onSubmit={handleNewTask}>
+        <div className="field">
+          <label className="label">Title</label>
+          <div className="control">
+            <input
+              type="text"
+              placeholder="Write a Title"
+              name="title"
+              onChange={handleInputChange}
+              value={task.title}
+              className="input"
+              autoFocus
+              ref={titleInput}
+            />
+          </div>
+        </div>
 
-        <form onSubmit={handleNewTask}>
-          <label>Title</label>
-          <input
-            type="text"
-            placeholder="Write a Title"
-            name="title"
-            onChange={handleInputChange}
-            value={task.title}
-            className="w3-input"
-            autoFocus
-            ref={titleInput}
-          />
-          <p></p>
-          <label>Description</label>
-          <textarea
-            onChange={handleInputChange}
-            name="description"
-            className="w3-input"
-            placeholder="Write a Description"
-            value={task.description}
-          ></textarea>
-          <p></p>
-          <button type="submit" className="w3-button w3-black">
+        <div className="field">
+          <label className="label">Description</label>
+          <div className="control">
+            <textarea
+              onChange={handleInputChange}
+              name="description"
+              className="textarea"
+              placeholder="Write a Description"
+              value={task.description}
+            ></textarea>
+          </div>
+        </div>
+
+        <div className="control">
+          <button type="submit" className="button is-black">
             Save <AiOutlinePlus />
           </button>
-          <p></p>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 };
