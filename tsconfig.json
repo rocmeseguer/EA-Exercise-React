@@ -22,5 +22,6 @@
   },
   "include": [
     "src"
-  ]
+  ],
+  "license": "GPL-3.0"
 }

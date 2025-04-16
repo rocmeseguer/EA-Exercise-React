@@ -6,9 +6,10 @@ import { BiTaskX } from "react-icons/bi";
 interface Props {
   tasks: ITodo[];
   deleteATask: (id: number) => any;
+  editATask: (task: ITodo) => void;
 }
 
-export const TaskList = ({ tasks, deleteATask }: Props): JSX.Element => {
+export const TaskList = ({ tasks, deleteATask, editATask }: Props): JSX.Element => {
   if (tasks.length === 0)
     return (
       <div className="notification">
@@ -22,7 +23,12 @@ export const TaskList = ({ tasks, deleteATask }: Props): JSX.Element => {
       <div className="grid">
         {tasks.map((task, i) => (
           <div className="cell">
-            <TaskCard key={task.id} task={task} deleteATask={deleteATask} />
+            <TaskCard 
+              key={task.id} 
+              task={task} 
+              deleteATask={deleteATask}
+              editATask={editATask} 
+            />
           </div>
         ))}
       </div>

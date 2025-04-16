@@ -5,7 +5,7 @@ import { TaskList } from './TaskList';
 
 
 export const Home: React.FC = () => {
-    const { tasks, addANewTask, deleteATask } = useLocalTodoService();
+    const { tasks, addANewTask, deleteATask, editATask } = useLocalTodoService();
 
     return (
         <div className="container">
@@ -15,7 +15,11 @@ export const Home: React.FC = () => {
                     <TaskForm addANewTask={addANewTask} />
                 </div>
                 <div className="column">
-                    <TaskList tasks={tasks} deleteATask={deleteATask} />
+                    <TaskList 
+                        tasks={tasks} 
+                        deleteATask={deleteATask} 
+                        editATask={editATask}
+                    />
                 </div>
             </div>
         </div>

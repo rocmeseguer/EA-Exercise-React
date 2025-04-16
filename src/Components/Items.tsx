@@ -1,6 +1,5 @@
 import React from 'react';
 import { ChangeEvent, useEffect, useState } from 'react';
-import axios from 'axios';
 import { Link } from "react-router-dom";
 import { ITodo } from '../Model/Todo';
 import { getAllTodos } from '../Services/todoService';

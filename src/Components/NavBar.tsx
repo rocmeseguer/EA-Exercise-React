@@ -9,7 +9,6 @@ function NavBar() {
                 <div className="navbar-start">
                     <Link className="navbar-item" to="/">Home</Link>
                     <Link className="navbar-item" to="/items">My Elements</Link>
-                    <Link className="navbar-item" to="/items/1">Element #1</Link>
                 </div>
             </div>
         </nav>

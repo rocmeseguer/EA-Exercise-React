@@ -1,12 +1,13 @@
 import { ITodo } from "../Model/Todo";
-import { BiSolidTrash } from "react-icons/bi";
+import { BiSolidTrash, BiEdit } from "react-icons/bi";
 
 interface Props {
   task: ITodo;
   deleteATask?: (id: number) => void;
+  editATask?: (task: ITodo) => void;
 }
 
-export const TaskCard = ({ task, deleteATask }: Props) => (
+export const TaskCard = ({ task, deleteATask, editATask }: Props) => (
   <div className="box">
     <div className="content">
       <h3 className="title is-4">{task.title}</h3>
@@ -14,15 +15,24 @@ export const TaskCard = ({ task, deleteATask }: Props) => (
       <p>Completed: {task.completed?.toString()}</p>
       <p>{task.description}</p>
 
-      {/* Renderiza el botón solo si deleteATask está definido */}
-      {deleteATask && (
-        <button
-          className="button is-danger"
-          onClick={() => task.id && deleteATask && deleteATask(task.id)}
-        >
-          Delete <BiSolidTrash />
-        </button>
-      )}
+      <div className="buttons">
+        {editATask && (
+          <button
+            className="button is-info"
+            onClick={() => editATask({ ...task, completed: !task.completed })}
+          >
+            Complete <BiEdit />
+          </button>
+        )}
+        {deleteATask && (
+          <button
+            className="button is-danger"
+            onClick={() => task.id && deleteATask(task.id)}
+          >
+            Delete <BiSolidTrash />
+          </button>
+        )}
+      </div>
     </div>
   </div>
 );

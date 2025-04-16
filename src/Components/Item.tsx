@@ -1,5 +1,4 @@
-
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from "react-router-dom";
 import { getTodoById } from '../Services/todoService';
 import { TaskCard } from "./TaskCard";
@@ -9,17 +8,16 @@ export const Item: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const [todo, setTodo] = useState<ITodo>();
 
-    // Función para obtener los datos del Todo
-    const fetchTodo = async () => {
+    const fetchTodo = useCallback(async () => {
         if (id) {
             const getTodo = await getTodoById(id);
             setTodo(getTodo);
         }
-    };
+    }, [id]);
 
     useEffect( () => {
         fetchTodo();
-    }, [id])
+    }, [fetchTodo])
 
     return (
         <div>

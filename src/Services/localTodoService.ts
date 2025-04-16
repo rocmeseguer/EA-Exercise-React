@@ -21,9 +21,17 @@ export const useLocalTodoService = () => {
   const deleteATask = (id: number): void =>
     setTasks(tasks.filter((task) => task.id !== id));
 
+  // Editar una tarea existente
+  const editATask = (updatedTask: ITodo): void => {
+    setTasks(tasks.map(task => 
+      task.id === updatedTask.id ? updatedTask : task
+    ));
+  };
+
   return {
     tasks,
     addANewTask,
     deleteATask,
+    editATask,
   };
 };
