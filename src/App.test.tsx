@@ -1,9 +1,12 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import { App } from './App';
 
-test('renders learn react link', () => {
+/**
+ * Test de integración: sin REACT_APP_API_URL la app usa el servidor simulado,
+ * así que podemos comprobar el ciclo Cargando -> Éxito de punta a punta.
+ */
+test('muestra las tareas cargadas desde la API simulada', async () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: 'Inicio' })).toBeInTheDocument();
+  expect(await screen.findByText('Repasar el Virtual DOM', {}, { timeout: 3000 })).toBeInTheDocument();
 });

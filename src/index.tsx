@@ -1,17 +1,28 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
+import { App } from './App';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+/**
+ * Punto de entrada. React monta el árbol de componentes dentro de #root.
+ * A partir de aquí, React mantiene un Virtual DOM en memoria y solo aplica
+ * al DOM real las diferencias mínimas tras cada cambio de estado.
+ *
+ * `StrictMode` activa comprobaciones extra en desarrollo (no afecta a producción).
+ */
+const rootElement: HTMLElement | null = document.getElementById('root');
+
+if (rootElement === null) {
+  throw new Error('No se ha encontrado el elemento #root en public/index.html.');
+}
+
 ReactDOM.render(
-  <React.StrictMode>
+  <StrictMode>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </StrictMode>,
+  rootElement,
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+// Para medir rendimiento: reportWebVitals(console.log)
 reportWebVitals();

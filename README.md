@@ -1,46 +1,67 @@
-# Getting Started with Create React App
+# EA Exercise React · BackOffice de tareas
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Frontend en **React 17 + TypeScript (strict)** que consume una **API REST** (Express) para gestionar tareas (CRUD completo), maquetado con **Tailwind CSS + daisyUI**.
 
-## Available Scripts
+> 📘 La explicación teórica de cada patrón, con ejemplos del propio código, está en **[CONCEPTS.md](./CONCEPTS.md)**. La sección central es *Consumo de APIs REST en React*.
 
-In the project directory, you can run:
+## Puesta en marcha
 
-### `npm start`
+```bash
+npm install
+npm start            # http://localhost:3000
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Por defecto la app usa un **servidor simulado en memoria** (`src/services/todo.mock.ts`) con el mismo contrato REST, así que funciona sin backend. El *badge* de la barra de navegación indica qué backend se está usando.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Conectar con la API de Express
 
-### `npm test`
+```bash
+cp .env.example .env.local
+# edita REACT_APP_API_URL, p. ej. http://localhost:4000/api
+npm start            # hay que reiniciar tras cambiar variables de entorno
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+La API debe exponer el recurso `/todos` y tener CORS habilitado:
 
-### `npm run build`
+| Método   | Ruta          | Body                                       | Respuesta                |
+| -------- | ------------- | ------------------------------------------ | ------------------------ |
+| `GET`    | `/todos`      | —                                          | `200` `Todo[]`           |
+| `GET`    | `/todos/:id`  | —                                          | `200` `Todo` / `404`     |
+| `POST`   | `/todos`      | `{ title, description, completed }`        | `201` `Todo`             |
+| `PATCH`  | `/todos/:id`  | parcial, p. ej. `{ completed: true }`      | `200` `Todo` / `404`     |
+| `DELETE` | `/todos/:id`  | —                                          | `204` / `404`            |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Donde `Todo = { _id | id, title: string, description?: string, completed: boolean }`. Los errores, con el formato de la API del curso: `{ "message": "...", "code": "..." }`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+> 🧪 **Ejercicio**: la API `EA-Exercise-RestAPI` todavía no tiene el recurso `todos`. Añádelo (modelo Mongoose + DTO Zod + service + controller + routes) siguiendo el patrón de `users`.
+>
+> Para probar solo la lectura sin backend propio puedes usar `REACT_APP_API_URL=https://jsonplaceholder.typicode.com` (no persiste las escrituras).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Estructura
 
-### `npm run eject`
+```text
+src/
+├── components/     # UI con Tailwind + daisyUI (common/, layout/, todos/)
+├── context/        # TodoContext / NotificationContext + reducers puros
+├── controllers/    # Custom Hooks: useTodos, useTodoMutations, useTodoDetail, useTodoForm...
+├── models/         # Tipos de dominio, DTOs de la API y type guards
+├── routes/         # AppRouter + vistas (HomePage, ItemsPage, ItemDetailPage, NotFoundPage)
+└── services/       # http.service (fetch genérico), todo.service (endpoints), todo.mock
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Rutas
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+| Ruta          | Vista            | Qué hace                                                  |
+| ------------- | ---------------- | --------------------------------------------------------- |
+| `/`           | `HomePage`       | Formulario de alta + tarjetas (completar / eliminar)      |
+| `/items`      | `ItemsPage`      | Listado filtrable por título con enlace al detalle        |
+| `/items/:id`  | `ItemDetailPage` | Detalle de una tarea (funciona también entrando por URL)  |
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Scripts
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+| Script              | Qué hace                                         |
+| ------------------- | ------------------------------------------------ |
+| `npm start`         | Servidor de desarrollo                           |
+| `npm run build`     | Build de producción en `build/`                  |
+| `npm test`          | Tests (Jest + Testing Library) en modo *watch*   |
+| `npm run typecheck` | Comprobación de tipos (`tsc --noEmit`)           |

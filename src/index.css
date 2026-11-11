@@ -1,13 +1,8 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+/*
+ * ÚNICO fichero CSS de la aplicación.
+ * Estas tres directivas inyectan las capas de Tailwind (y de daisyUI, que es
+ * un plugin de Tailwind). Todo el estilado se hace con clases en el JSX.
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

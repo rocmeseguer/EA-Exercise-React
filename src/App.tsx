@@ -1,29 +1,16 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+import { NotificationProvider } from './context/NotificationContext';
+import { TodoProvider } from './context/TodoContext';
+import { AppRouter } from './routes/AppRouter';
 
-import './w3.css';
-import './bulma.min.css';
-import './App.css';
-
-import Home from './Components/Home';
-import Item from './Components/Item';
-import Items from './Components/Items';
-import NavBar from './Components/NavBar';
-
-function App() {
-  return (
-    <BrowserRouter>
-
-      <NavBar />
-      <div className="w3-container">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/items" element={<Items />} />
-          <Route path="/items/:id" element={<Item />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
-  );
-}
-
-export default App;
+/**
+ * Componente raíz. Su única responsabilidad es COMPONER la aplicación:
+ * los Providers envuelven al router para que todas las vistas compartan
+ * el mismo estado global (tareas + notificaciones).
+ */
+export const App = (): JSX.Element => (
+  <NotificationProvider>
+    <TodoProvider>
+      <AppRouter />
+    </TodoProvider>
+  </NotificationProvider>
+);
